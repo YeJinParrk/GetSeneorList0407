@@ -23,24 +23,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTxtSensors =findViewById(R.id.txtSensors);
+        mTxtSensors = findViewById(R.id.txtSensors);
 //        mTxtSensors .setMovementMethod(new ScrollingMovementMethod());
         mButton = findViewById(R.id.button);
-        mButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
+        mButton.setOnClickListener(new MyOnClickListener());
+    }
 
-                sensorList = sensorMgr.getSensorList(Sensor.TYPE_ALL);
+    private class MyOnClickListener implements View.OnClickListener {
+        @Override
+        public void onClick(View v) {
+            sensorMgr = (SensorManager) getSystemService(SENSOR_SERVICE);
 
-                mTxtSensors.append("(# Sensors :" + sensorList.size() + ")\n\n");
-                for(Sensor sensor : sensorList){ // Inhanced for loop
-                    mTxtSensors.append("Sensor name: " + sensor.getName() + "\n");
-                    mTxtSensors.append("Sensor type: " + sensor.getType() + "\n\n");
-                }
+            sensorList = sensorMgr.getSensorList(Sensor.TYPE_ALL);
+
+            mTxtSensors.append("(# Sensors :" + sensorList.size() + ")\n\n");
+            for (Sensor sensor : sensorList) {  // Inhanced for loop
+                mTxtSensors.append("Sensor name: " + sensor.getName() + "\n");
+                mTxtSensors.append("Sensor type: " + sensor.getType() + "\n\n");
 
             }
-        });
-
+        }
     }
 }
